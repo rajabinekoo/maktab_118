@@ -1,0 +1,178 @@
+/* body {
+  background-color: black;
+  color: rgb(120, 255, 71);
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+} */
+/* 
+* {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+span {
+  color: blue;
+  /* font-size: 30px; */
+}
+
+span {
+  color: black;
+}
+
+/* span {
+  color: black;
+  font-size: 30px;
+} */
+
+.class-a {
+  color: red;
+}
+
+p.text-brown {
+  color: brown;
+}
+
+.class-b {
+  color: violet;
+}
+
+.class-c {
+  color: orange;
+}
+
+#user-name,
+p.user-name {
+  color: green;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+div.font .font-standard {
+  font-family: "Fira Code";
+}
+
+div.font-child > .font-standard {
+  font-family: "Ubuntu";
+}
+
+div + .sibiling-div {
+  font-size: 2rem;
+}
+
+div ~ .sibiling-div {
+  color: rgb(239, 95, 167);
+}
+
+.maktab-118 {
+  background-color: red;
+  /* width: 600px; */
+  width: 50%;
+  height: 160px;
+}
+
+.maktab-118-2 {
+  background-color: black;
+  width: 50%;
+  height: 60%;
+}
+
+.maktab-118-3 {
+  background-color: green;
+  width: 50vw;
+  height: 20vh;
+}
+
+.box {
+  margin-top: 90px;
+  background-color: rgb(255, 113, 137);
+  height: 90px;
+  width: 90vmin;
+  font-size: 14px;
+  direction: rtl;
+}
+
+.box p {
+  font-size: 2em;
+  text-align: center;
+}
+
+.capitalized {
+  text-transform: capitalize;
+  text-decoration: underline;
+  text-indent: 20px;
+  letter-spacing: 5px;
+  word-spacing: 10px;
+  white-space: nowrap;
+  line-height: 130px;
+  /* 
+  text-overflow: ellipsis;
+  overflow: hidden; */
+}
+
+.box-model {
+  width: 160px;
+  height: 160px;
+  background-color: aqua;
+  /* border-color: blue;
+  border-width: 1px 12px 5px 6px;
+  border-style: solid; */
+  border: 1px blue solid;
+
+  /* border-top-width: 1px;
+  border-right-width: 12px;
+  border-bottom-width: 5px;
+  border-left-width: 6px; */
+
+  /* border-radius: 5px 10px 15px 20px; */
+
+  padding: 5px 20px 0 10px;
+  /* padding-top: 5px;
+  padding-right: 20px;
+  padding-bottom: 0;
+  padding-left: 10px; */
+
+  margin: 10px 10px;
+
+  box-sizing: border-box;
+}
+
+.box-model div {
+  width: 100%;
+  height: 60px;
+  background-color: red;
+}
+
+.green-box {
+  width: 600px;
+  border: 2px green solid;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  padding: 10px;
+}
+
+.green-box img {
+  width: 200px;
+  height: 200px;
+  float: right;
+  margin-left: 10px;
+}
+
+.clearfix {
+  overflow: auto;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.clear-right {
+  clear: right;
+}
