@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.red-box {
+  background-color: red;
+  width: 400px;
+  height: 400px;
+  position: relative;
+  margin-top: 50px;
+  transition: all 2s;
+}
+
+.d-none {
+  display: none;
+}
+
+.visible-hidden {
+  visibility: hidden;
+}
+
+.text-box {
+  border: 3px solid blue;
+  border-radius: 10px;
+  width: 800px;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.blue-box {
+  background-color: blue;
+  width: 200px;
+  height: 200px;
+  /* position: fixed; */
+  position: absolute;
+  /* position: sticky; */
+  /* bottom: 0;
+  right: 0; */
+  /* left: 0; */
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.pink-box {
+  background-color: pink;
+  width: 300px;
+  height: 300px;
+  /* position: fixed; */
+  position: absolute;
+  /* position: sticky; */
+  bottom: 0;
+  right: 0;
+  /* left: 0; */
+  /* top: 10px; */
+  z-index: 1;
+}
+
+.pink-box:hover {
+  background-color: rgb(255, 124, 146);
+  cursor: pointer;
+}
+
+.anchor:link {
+  color: blue;
+}
+
+.anchor:visited {
+  color: palevioletred;
+}
+
+.anchor:active {
+  color: black;
+}
+
+.anchor:hover {
+  color: cyan;
+  cursor: progress;
+}
+
+.btn {
+  background-color: blue;
+  border: 1px solid blue;
+  border-radius: 7px;
+  color: white;
+  font-weight: 500;
+  font-family: "Fira Code";
+  padding: 5px 10px;
+}
+
+.btn:hover {
+  background-color: rgb(120, 120, 255);
+  border: 1px solid rgb(120, 120, 255);
+  cursor: pointer;
+}
+
+.btn:disabled {
+  background-color: gray;
+  border: 1px solid gray;
+  cursor: not-allowed;
+}
+
+.playground-typography {
+  color: blue;
+}
+
+.playground-typography::first-line {
+  color: red;
+}
+
+.red-box:hover {
+  transform: scale(1.5, 1.5);
+}
+
+.box {
+  width: 400px;
+  height: 400px;
+  border: 2px solid green;
+  border-radius: 8px;
+  padding: 0 20px;
+}
