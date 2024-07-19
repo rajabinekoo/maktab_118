@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* variables */
+:root {
+  --base-height: 250px;
+  --base-space: 20px;
+  --blue: #3483e8;
+  --pink: #f83c79;
+  --teal: #00f0bf;
+  --orange: #ecbb52;
+}
+
+body {
+  padding: 0 var(--base-space);
+  display: grid;
+  row-gap: var(--base-space);
+}
+
+.header {
+  background-color: var(--blue);
+  height: calc(var(--base-height) - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-title {
+  color: white;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.gray-boxes-parent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: var(--base-space);
+}
+
+.gray-box {
+  background-color: #eeeeee;
+  height: var(--base-height);
+}
+
+.colorized-boxes-parent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: var(--base-space);
+}
+
+.colorized-box {
+  height: calc(var(--base-height) + 50px);
+}
+
+.blue-box {
+  background-color: var(--blue);
+}
+
+.pink-box {
+  background-color: var(--pink);
+}
+
+.teal-box {
+  background-color: var(--teal);
+}
+
+.orange-box {
+  background-color: var(--orange);
+}
+
+.red-box {
+  width: 180px;
+  height: 180px;
+  background-color: red;
+}
+
+.black-box {
+  width: 300px;
+  height: 300px;
+  background-color: black;
+}
