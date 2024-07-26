@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 10px;
+  font-family: Ubuntu;
+}
+
+.container {
+  width: 800px;
+  height: 800px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 266px;
+}
+
+.cell:hover {
+  background-color: turquoise;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.xo {
+  font-size: 50px;
+}
