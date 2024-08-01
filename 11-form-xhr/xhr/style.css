@@ -1,0 +1,207 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  max-width: 1240px;
+  margin: auto;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+}
+
+.container {
+  margin-top: 40px;
+  display: grid;
+  row-gap: 40px;
+  column-gap: 10px;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+}
+
+.card > p:first-child {
+  font-weight: bold;
+}
+
+.card > img {
+  max-width: 200px;
+  width: 100%;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid-cols-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+.grid-cols-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.grid-cols-7 {
+  grid-template-columns: repeat(7, 1fr);
+}
+.grid-cols-8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+.grid-cols-9 {
+  grid-template-columns: repeat(9, 1fr);
+}
+.grid-cols-10 {
+  grid-template-columns: repeat(10, 1fr);
+}
+.grid-cols-11 {
+  grid-template-columns: repeat(11, 1fr);
+}
+.grid-cols-12 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+
+/* md */
+@media only screen and (min-width: 550px) {
+  .grid-cols-md-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .grid-cols-md-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-cols-md-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-cols-md-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .grid-cols-md-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .grid-cols-md-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid-cols-md-7 {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .grid-cols-md-8 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .grid-cols-md-9 {
+    grid-template-columns: repeat(9, 1fr);
+  }
+  .grid-cols-md-10 {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .grid-cols-md-11 {
+    grid-template-columns: repeat(11, 1fr);
+  }
+  .grid-cols-md-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+/* lg */
+@media only screen and (min-width: 770px) {
+  .grid-cols-lg-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .grid-cols-lg-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-cols-lg-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-cols-lg-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .grid-cols-lg-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .grid-cols-lg-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid-cols-lg-7 {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .grid-cols-lg-8 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .grid-cols-lg-9 {
+    grid-template-columns: repeat(9, 1fr);
+  }
+  .grid-cols-lg-10 {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .grid-cols-lg-11 {
+    grid-template-columns: repeat(11, 1fr);
+  }
+  .grid-cols-lg-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+/* xl */
+@media only screen and (min-width: 1200px) {
+  .grid-cols-xl-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .grid-cols-xl-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-cols-xl-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-cols-xl-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .grid-cols-xl-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .grid-cols-xl-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid-cols-xl-7 {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  .grid-cols-xl-8 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .grid-cols-xl-9 {
+    grid-template-columns: repeat(9, 1fr);
+  }
+  .grid-cols-xl-10 {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  .grid-cols-xl-11 {
+    grid-template-columns: repeat(11, 1fr);
+  }
+  .grid-cols-xl-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
