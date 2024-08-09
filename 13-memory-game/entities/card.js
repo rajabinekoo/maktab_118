@@ -4,7 +4,7 @@
 // }
 
 // export function CardGenerator({ name }) {
-//   return `<button onclick="onClickCard(event)">${name}</button>`;
+//   return `<button data-name="${name}" onclick="onClickCard(event)">${name}</button>`;
 // }
 
 // ========== data binding solution ==========
@@ -19,7 +19,6 @@
 // ========== add event listener solution ==========
 
 let lastSelectedCardElement = undefined;
-let lastSelectedCard = "";
 let passedCards = {};
 let score = 20;
 let avoid = false;
@@ -32,7 +31,7 @@ let avoid = false;
 //   return getMainParent(element.parentElement);
 // }
 
-// white
+// while
 function getMainParent(element) {
   let flipCard = null;
   let targetElement = element;
@@ -54,31 +53,24 @@ const onClickCard = (e) => {
 
   mainDiv.classList.add("active");
 
-  if (!Boolean(lastSelectedCard)) {
-    lastSelectedCard = name;
+  if (!Boolean(lastSelectedCardElement)) {
     lastSelectedCardElement = mainDiv;
-    console.log("set shod");
-  } else if (lastSelectedCard === name) {
-    console.log("affffarinnnnn che kardiiiiii");
+  } else if (lastSelectedCardElement?.dataset?.name === name) {
     passedCards[name] = true;
-    lastSelectedCard = "";
     lastSelectedCardElement = undefined;
   } else {
     if (score > 0) score--;
-    console.log("dobare emtahan kon");
     avoid = true;
     setTimeout(() => {
       mainDiv.classList.remove("active");
       lastSelectedCardElement.classList.remove("active");
-      lastSelectedCard = "";
       lastSelectedCardElement = undefined;
       avoid = false;
     }, 1000);
   }
 
-  console.log(passedCards);
   if (Object.keys(passedCards).length === 6) {
-    alert("Emtiaze shoma", score);
+    console.log(`Emtiaze shoma: ${score}`);
   }
 };
 
