@@ -30,7 +30,7 @@ async function getUsers() {
   //       console.log("error", error);
   //     });
 
-  let response1 = await fetch("https://reqres.in/api3/users?page=1", {
+  let response1 = await fetch("https://reqres.in/api/users?page=1", {
     method: "GET",
   });
   if (response1.status !== 200) {
@@ -101,25 +101,72 @@ function filterByA(users) {
 
 // ================== Promise methods ==================
 
-async function fetchUserById(id) {
-  let response = await fetch(`https://reqres.in/api/users/${id}`, {
-    method: "GET",
-  });
-  return response.json();
-}
+// async function fetchUserById(id, signal) {
+//   let response = await fetch(
+//     `https://reqres.in/api/users/${id}`,
+//     {
+//       method: "GET",
+//       signal,
+//     },
+//     {}
+//   );
+//   if (response.status !== 200) {
+//     throw new AppError(response.status);
+//   }
+//   return response.json();
+// }
+
+// async function main() {
+//   try {
+//     let users = [];
+//     let signals = [];
+//     for (let index = 1; index <= 13; index++) {
+//       let controller = new AbortController();
+//       users.push(fetchUserById(index, controller.signal));
+//       signals.push(controller);
+//       // await fetchUserById(index);
+//     }
+//     // let results = await Promise.all(users);
+//     // let results = await Promise.allSettled(users);
+//     let results = await Promise.race(users);
+//     for (const s of signals) {
+//       s.abort();
+//     }
+//     console.log(results);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// main();
+
+// ================== .map(), .filter(), .reduce() ==================
+
+let array = [1, 2, 3, 4, 5];
+console.log(array.map((el) => el * 2).filter((el) => el % 4 === 0));
 
 async function main() {
   try {
-    let users = [];
-    for (let index = 1; index <= 12; index++) {
-        users.push(fetchUserById(index));
-    //   await fetchUserById(index);
-    }
-    let results = await Promise.all(users);
-    console.log(results);
-  } catch (error) {
-    console.log(error);
-  }
+    let users = await getUsers();
+    // map usecases
+    users = users.map((el) => {
+      return { ...el, price: Math.floor(Math.random() * 10) };
+    });
+    users = users.map((el) => {
+      if (el.id === 2) {
+        return { ...el, first_name: "Ali" };
+      }
+      return el;
+    });
+    let cards = users.map((el) => `<p>${el.first_name}</p>`);
+    document.body.innerHTML = cards.join("");
+    // reduce usecases
+    let priceSum = users.reduce((prev, current) => {
+      return prev + current.price;
+    }, 0);
+    console.log(users.map((el) => el.price));
+    console.log(priceSum);
+  } catch (error) {}
 }
 
 main();
