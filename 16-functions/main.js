@@ -185,8 +185,42 @@ function validationGenerator(type) {
   }
 }
 
-const isValid = validationGenerator("person")({
+const personValidator = validationGenerator("person");
+const isValid = personValidator({
   firstName: "ali",
   lastName: "rajabi",
 });
 console.log(isValid);
+
+// =============================== Call, Apply, Bind methods ==============================
+
+// function constructor
+// const a2 = new Function('name', "console.log(name)")
+// a2("ali")
+
+function sum(...numbers) {
+  return numbers.reduce((prev, current) => prev + current, this.initialState);
+}
+
+const obj1 = {
+  test: "test",
+  initialState: 0,
+  sum,
+};
+
+const obj2 = {
+  test: "test2",
+  sum,
+};
+
+// const sum2 = sum.bind({}, 3, 4);
+// console.log(sum2());
+
+const array = [3, 4, 2, 1];
+// console.log(sum.apply({}, array));
+console.log(obj1.sum(...array));
+console.log(obj2.sum.apply({ ...obj2, initialState: 2 }, array));
+console.log(obj2.sum.call({ ...obj2, initialState: 2 }, 1, 2, 3));
+console.log(obj2);
+
+// const array2 = [].push(...array);
