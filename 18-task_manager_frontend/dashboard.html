@@ -6,8 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body class="!text-gray-800">
-    <main></main>
+  <body class="!text-gray-800 bg-slate-100">
+    <!-- navigation bar -->
+    <nav class="w-full h-20 bg-gray-500 px-4 flex items-center justify-between">
+      <p
+        id="username"
+        class="text-white font-medium text-2xl max-w-[100px] w-full overflow-hidden text-nowrap text-ellipsis"
+      >
+        Unknown
+      </p>
+      <div class="space-x-2">
+        <button
+          id="logout-btn"
+          class="border-2 border-gray-50 rounded-xl text-white font-medium text-lg py-2 px-4 hover:bg-gray-600"
+        >
+          Logout
+        </button>
+        <a
+          href="/new-task"
+          class="border-2 border-gray-50 rounded-xl text-white font-medium text-lg py-3 px-4 hover:bg-gray-600"
+        >
+          New Task
+        </a>
+      </div>
+    </nav>
+
+    <!-- tasks list -->
+    <main class="container mx-auto px-2">
+      <section
+        id="tasks-list-container"
+        class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 py-10"
+      ></section>
+    </main>
+
     <script type="module" src="/main.js"></script>
     <script defer type="module" src="/scripts/dashboard.js"></script>
   </body>

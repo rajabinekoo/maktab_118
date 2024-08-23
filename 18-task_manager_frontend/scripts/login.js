@@ -1,3 +1,4 @@
+import { toast } from "../libs/toast";
 import { login } from "../apis/services/auth.service";
 import { errorHandler } from "../libs/error-handler";
 import { setSessionToken } from "../libs/session-manager";
@@ -17,7 +18,11 @@ loginForm.addEventListener("submit", async (event) => {
     setTimeout(() => {
       window.location.href = "/dashboard";
     }, 3000);
+    console.log('ok');
+    
   } catch (error) {
+    console.log(error);
+    
     errorHandler(error);
   }
 });

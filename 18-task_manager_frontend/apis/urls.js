@@ -6,5 +6,9 @@ export const urls = {
   user: "/user",
   task: {
     new: "/task",
+    list: "/task",
+    delete: (id) => `/task/${id}`,
+    done: (id) => `/task/done/${id}`,
+    inprogress: (id) => `/task/inprogress/${id}`,
   },
 };
