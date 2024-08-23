@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body class="!text-gray-800">
+    <main
+      class="flex justify-center items-center px-4 h-screen w-screen bg-slate-100"
+    >
+      <section
+        class="max-w-[500px] w-full py-5 px-7 bg-white border border-gray-200 rounded-xl shadow-lg space-y-5"
+      >
+        <p class="text-2xl font-semibold">Signup</p>
+
+        <form id="signup-form" class="w-full">
+          <label
+            for="username-input"
+            class="block text-sm font-medium leading-6 mb-2"
+            >Username</label
+          >
+          <input
+            type="text"
+            name="username"
+            id="username-input"
+            class="block w-full rounded-xl border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="Enter your username"
+          />
+
+          <label
+            for="password-input"
+            class="block text-sm font-medium leading-6 mb-2 mt-5"
+            >Password</label
+          >
+          <input
+            type="password"
+            name="password"
+            id="password-input"
+            class="block w-full rounded-xl border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="Enter your password"
+          />
+
+          <button
+            class="mt-5 bg-gray-700 text-white font-semibold text-md w-full rounded-xl py-1.5 hover:bg-gray-600"
+            type="submit"
+          >
+            Signup
+          </button>
+          <div class="flex justify-center mt-1">
+            <a
+              class="text-xs font-semibold hover:underline text-blue-600"
+              href="/"
+              >login</a
+            >
+          </div>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="/main.js"></script>
+    <script defer type="module" src="/scripts/signup.js"></script>
+  </body>
+</html>
