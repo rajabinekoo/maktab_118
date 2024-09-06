@@ -44,11 +44,9 @@ class ReqResApis {
     });
   }
 
-  public async getUsersList(
-    page = 1
-  ): Promise<IReqResPaginationDto<IReqResUserDto>> {
+  public async getUsersList(page = 1) {
     const response = await this.httpClient.get(this.urls.usersListUrl(page));
-    return response.data;
+    return response.data as IReqResPaginationDto<IReqResUserDto>;
   }
 
   public async getResourcesList(
@@ -65,6 +63,9 @@ class ReqResApis {
 function sortData<T = { id: number }>(list: { id: number }[]): T[] {
   return <Array<T>>list.sort((a, b) => b.id - a.id);
 }
+function sortData2(list: { id: number }[]) {
+  return list.sort((a, b) => b.id - a.id);
+}
 
 async function main() {
   const reqres = new ReqResApis();
@@ -72,9 +73,7 @@ async function main() {
     const users = await reqres.getUsersList();
     const sortedUsers: IReqResUserDto[] = sortData<IReqResUserDto>(users.data);
     const resources = await reqres.getResourcesList();
-    const sortedSources: IReqResResourceDto[] = sortData<IReqResResourceDto>(
-      resources.data
-    );
+    const sortedSources = sortData2(resources.data) as IReqResResourceDto[];
     console.log(sortedUsers[0].avatar, sortedSources[0].color);
   } catch (error) {
     console.log(error);
