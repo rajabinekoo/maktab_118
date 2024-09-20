@@ -1,13 +1,37 @@
-import { useState } from "react";
+import React from "react";
+import { Input } from "./components/input";
 import { className } from "./utils/classNames";
 
 function App() {
-  const [username, setUsername] = useState<string>("");
+  // const [username, setUsername] = React.useState<string>("");
+  // const [password, setPassword] = React.useState<string>("");
 
-  const onChangeUsernameHandler: React.ChangeEventHandler<HTMLInputElement> = (
-    event
+  // const handleUsername: React.ChangeEventHandler<HTMLInputElement> = (
+  //   event
+  // ) => {
+  //   setUsername(event.target.value);
+  // };
+
+  // const handlePassword: React.ChangeEventHandler<HTMLInputElement> = (
+  //   event
+  // ) => {
+  //   setPassword(event.target.value);
+  // };
+
+  const [values, setValues] = React.useState<{
+    username: string;
+    password: string;
+  }>({ username: "", password: "" });
+
+  const inputChangeHandler = (
+    inputType: "username" | "password",
+    value: string
   ) => {
-    setUsername(event.target.value);
+    setValues({ ...values, [inputType]: value });
+  };
+
+  const submit = () => {
+    console.log(values);
   };
 
   return (
@@ -19,15 +43,29 @@ function App() {
         )}
       >
         <p className="text-xl font-semibold">Login</p>
-        <div className="flex flex-col gap-y-2 mt-4">
-          <label>Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={onChangeUsernameHandler}
-            className="border border-slate-300 rounded-xl px-2 py-2"
-          />
-        </div>
+        <Input
+          placeholder="Username"
+          label="Username"
+          onChangeHandler={(value) => inputChangeHandler("username", value)}
+        />
+        <Input
+          placeholder="Password"
+          label="Password"
+          type="password"
+          onChangeHandler={(value) => inputChangeHandler("password", value)}
+          validator={(value) => value?.length >= 8}
+        />
+
+        <button
+          onClick={submit}
+          className={className(
+            "bg-black rounded-xl text-white",
+            "text-lg font-semibold w-full py-2 mt-5",
+            "disabled:bg-slate-600"
+          )}
+        >
+          Submit
+        </button>
       </section>
     </main>
   );
