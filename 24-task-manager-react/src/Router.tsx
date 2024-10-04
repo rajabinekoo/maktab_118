@@ -36,14 +36,14 @@
 
 import { Home } from "./pages/home";
 import { NotFound } from "./pages/404";
-import { Test1 } from "./pages/test1";
+import { TasksListPage } from "./pages/tasks";
 
 export function Router() {
   switch (window.location.pathname) {
     case "/":
       return <Home />;
-    case "/test":
-      return <Test1 />;
+    case "/tasks":
+      return <TasksListPage />;
     default:
       return <NotFound />;
   }

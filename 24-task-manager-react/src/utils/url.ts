@@ -1,3 +1,4 @@
 export const urls = {
-  login: "/auth/login",
+  auth: { login: "/auth/login", signup: "/auth/signup" },
+  task: { list: "/task" },
 };
