@@ -35,16 +35,41 @@
 // }
 
 import { Home } from "./pages/home";
+import { NewTask } from "./pages/new";
 import { NotFound } from "./pages/404";
+import { MainLayout } from "./templates/main";
 import { TasksListPage } from "./pages/tasks";
+import { Dashboard } from "./templates/dashboard";
 
 export function Router() {
   switch (window.location.pathname) {
     case "/":
-      return <Home />;
+      return (
+        <MainLayout>
+          <Home />
+        </MainLayout>
+      );
+    case "/new":
+      return (
+        <MainLayout>
+          <Dashboard>
+            <NewTask />
+          </Dashboard>
+        </MainLayout>
+      );
     case "/tasks":
-      return <TasksListPage />;
+      return (
+        <MainLayout>
+          <Dashboard>
+            <TasksListPage />
+          </Dashboard>
+        </MainLayout>
+      );
     default:
-      return <NotFound />;
+      return (
+        <MainLayout>
+          <NotFound />
+        </MainLayout>
+      );
   }
 }

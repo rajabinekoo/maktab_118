@@ -4,3 +4,8 @@ export interface ITask {
   description: string;
   isCompleted: boolean;
 }
+
+export interface ICreateTaskReqDto {
+  title: string;
+  description: string;
+}

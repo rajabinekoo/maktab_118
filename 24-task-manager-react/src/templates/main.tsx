@@ -1,12 +1,14 @@
-import { Navbar } from "../components/navbar";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export const MainLayout: React.FC<{
   children: JSX.Element | JSX.Element[];
 }> = ({ children }) => {
   return (
-    <div>
-      <Navbar />
+    <>
+      <ToastContainer />
       {children}
-    </div>
+    </>
   );
 };
