@@ -33,7 +33,7 @@ export const LoginForm: React.FC = () => {
     try {
       const response = await login(values);
       setSession(response.token);
-      window.location.href = "/tasks";
+      window.location.href = "/dashboard/tasks";
     } catch (error: unknown) {
       const err = error as AxiosError;
       const response = err.response?.data as { message: Array<string> };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "wouter";
 import { AxiosError } from "axios";
 
 import { IUser } from "../types/user";
@@ -36,12 +37,18 @@ export const Navbar: React.FC = () => {
           <p className="text-slate-50 font-semibold text-lg">{info.username}</p>
         )}
         <div className="flex gap-3">
-          <a
+          <Link
             href="/new"
             className="bg-slate-300 hover:bg-slate-400 rounded-lg py-1 px-2"
           >
             New
-          </a>
+          </Link>
+          <Link
+            href="/tasks"
+            className="bg-slate-300 hover:bg-slate-400 rounded-lg py-1 px-2"
+          >
+            List
+          </Link>
           <button
             onClick={logout}
             className="bg-slate-300 hover:bg-slate-400 rounded-lg py-1 px-2"

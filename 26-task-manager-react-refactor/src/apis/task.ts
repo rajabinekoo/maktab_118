@@ -27,8 +27,9 @@ export const inprogressTask: inprogressTaskType = async (id) => {
   await client.patch(urls.task.inprogress(id));
 };
 
-type addTaskType = (_: ICreateTaskReqDto) => Promise<void>;
+type addTaskType = (_: ICreateTaskReqDto) => Promise<ITask>;
 export const addTask: addTaskType = async (body) => {
   const client = generateClient();
-  await client.post(urls.task.create, body);
+  const response = await client.post<ITask>(urls.task.create, body);
+  return response.data;
 };

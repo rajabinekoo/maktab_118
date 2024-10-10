@@ -1,14 +1,15 @@
 import * as React from "react";
 import { AxiosError } from "axios";
-
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+
 import { addTask } from "../apis/task";
 import { Input } from "../components/input";
 import { classNames } from "../utils/classNames";
 import { ICreateTaskReqDto } from "../types/task";
+import { TaskListContext } from "../providers/tasks-list.provider";
 
 export const NewTaskForm: React.FC = () => {
-  const [loading, setLoading] = React.useState<boolean>(false);
   const [serverError, setServerError] = React.useState<string>("");
   const [values, setValues] = React.useState<ICreateTaskReqDto>({
     title: "",
@@ -18,6 +19,11 @@ export const NewTaskForm: React.FC = () => {
     title: "",
     description: "",
   });
+
+  const addTaskMutation = useMutation({ mutationFn: addTask });
+  const { tasks, dispatch } = React.useContext(TaskListContext);
+
+  console.log(tasks);
 
   const onValueChange = (field: keyof ICreateTaskReqDto, value: string) => {
     const newValues = { ...values };
@@ -30,13 +36,11 @@ export const NewTaskForm: React.FC = () => {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
-    setLoading(true);
     try {
-      await addTask(values);
+      const newTask = await addTaskMutation.mutateAsync(values);
+      console.log(newTask);
+      dispatch({ type: "add", payload: newTask });
       toast.success("Created");
-      setTimeout(() => {
-        window.location.href = "/tasks";
-      }, 2000);
     } catch (error: unknown) {
       const err = error as AxiosError;
       const response = err.response?.data as { message: Array<string> };
@@ -57,7 +61,6 @@ export const NewTaskForm: React.FC = () => {
         setServerError(response.message);
       }
     }
-    setLoading(false);
   };
 
   return (
@@ -68,6 +71,7 @@ export const NewTaskForm: React.FC = () => {
         value={values.title}
         error={errors.title}
         onChange={(e) => onValueChange("title", e.target.value)}
+        disabled={addTaskMutation.isPending}
       />
       <Input
         type="description"
@@ -76,9 +80,10 @@ export const NewTaskForm: React.FC = () => {
         value={values.description}
         error={errors.description}
         onChange={(e) => onValueChange("description", e.target.value)}
+        disabled={addTaskMutation.isPending}
       />
       <button
-        disabled={loading}
+        disabled={addTaskMutation.isPending}
         className={classNames(
           "text-white bg-gray-800 w-full py-1",
           "rounded-sm font-medium hover:bg-gray-700",
