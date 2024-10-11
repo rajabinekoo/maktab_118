@@ -48,3 +48,28 @@ export default tseslint.config({
   },
 })
 ```
+
+
+Server URL: https://dummyjson.com
+
+- Home page:
+
+Application information
+
+- Users page:
+
+users list
+
+- Posts page:
+
+posts list
+posts owner info
+200 character for description
+
+- Post info page:
+
+full post description
+post owner
+comments and comments owner
+
+- 404 not found page

@@ -8,6 +8,9 @@ import {
 
 import { PostsPage } from "./pages/posts";
 import { MainLayout } from "./layouts/main";
+import { ErrorBoundary } from "./components/errorBoundary";
+import { NotFound } from "./pages/not-found";
+import { fetchPostByIdLoader, PostById } from "./pages/post-by-id";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +20,7 @@ const router = createBrowserRouter([
         <h1>Hello World</h1>
       </div>
     ),
+    errorElement: <ErrorBoundary />,
   },
   {
     element: <MainLayout />,
@@ -24,14 +28,20 @@ const router = createBrowserRouter([
       {
         path: "posts",
         element: <PostsPage />,
+        errorElement: <ErrorBoundary />,
       },
       {
         path: "users",
         element: <div>users</div>,
       },
       {
-        path: "post-info",
-        element: <div>post info</div>,
+        path: "post-info/:id",
+        element: <PostById />,
+        loader: fetchPostByIdLoader,
+      },
+      {
+        path: "/404",
+        element: <NotFound />,
       },
     ],
   },
@@ -39,7 +49,7 @@ const router = createBrowserRouter([
 
 const router2 = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
+    <Route errorElement={<ErrorBoundary />}>
       <Route
         index={true}
         element={
@@ -50,8 +60,17 @@ const router2 = createBrowserRouter(
       />
       <Route element={<MainLayout />}>
         <Route path="users" element={<div>users</div>} />
-        <Route path="posts" element={<PostsPage />} />
-        <Route path="post-info" element={<div>post info</div>} />
+        <Route
+          path="posts"
+          element={<PostsPage />}
+          errorElement={<ErrorBoundary />}
+        />
+        <Route
+          path="post-info/:id"
+          element={<PostById />}
+          loader={fetchPostByIdLoader}
+          errorElement={<ErrorBoundary />}
+        />
       </Route>
     </Route>
   )
