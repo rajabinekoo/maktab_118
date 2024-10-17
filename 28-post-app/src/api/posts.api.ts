@@ -4,13 +4,17 @@ import { IPost } from "../types/posts.type";
 import { listsLimit } from "../utils/config";
 import { IPagination, IResDto } from "../types/global.type";
 
+interface IFetchPostsReqDto extends IPagination {
+  tag?: string | null;
+}
 interface IFetchPostsResDto extends IResDto {
   posts: IPost[];
 }
-type fetchPostsListType = (_?: IPagination) => Promise<IFetchPostsResDto>;
+type fetchPostsListType = (_?: IFetchPostsReqDto) => Promise<IFetchPostsResDto>;
 export const fetchPostsList: fetchPostsListType = async (params) => {
   const client = generateClient();
-  const response = await client.get<IFetchPostsResDto>(urls.posts.list, {
+  const url = !params?.tag ? urls.posts.list : urls.posts.byTag(params.tag);
+  const response = await client.get<IFetchPostsResDto>(url, {
     params: { limit: params?.limit || listsLimit, skip: params?.skip || 0 },
   });
   return response.data;

@@ -19,3 +19,10 @@ export const fetchUsersListByIds: fetchUsersListByIds = async (ids) => {
   }
   return data;
 };
+
+type fetchSingleUserById = (_: number) => Promise<IUser>;
+export const fetchSingleUserById: fetchSingleUserById = async (id) => {
+  const client = generateClient();
+  const response = await client.get<IUser>(urls.users.byId(id));
+  return response.data;
+};

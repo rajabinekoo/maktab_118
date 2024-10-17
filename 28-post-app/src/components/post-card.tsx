@@ -2,12 +2,19 @@ import { AiOutlineLike, AiOutlineDislike, AiOutlineEye } from "react-icons/ai";
 
 import { IPost } from "../types/posts.type";
 import { IUser } from "../types/users.type";
+import { Link } from "react-router-dom";
+import { classNames } from "../utils/classNames";
 
 interface IPostCardProps {
   user: IUser;
   post: IPost;
+  extendBody?: boolean;
 }
-export const PostCard: React.FC<IPostCardProps> = ({ user, post }) => {
+export const PostCard: React.FC<IPostCardProps> = ({
+  user,
+  post,
+  extendBody = false,
+}) => {
   return (
     <div className="shadow-md bg-white rounded-xl w-full py-3 px-4">
       <div className="flex items-center gap-3">
@@ -28,23 +35,29 @@ export const PostCard: React.FC<IPostCardProps> = ({ user, post }) => {
       <p className="truncate text-gray-700 capitalize text-lg font-semibold pt-3 pb-1">
         {post.title}
       </p>
-      <p className="text-justify line-clamp-1 text-sm font-medium text-gray-600">
-        {post.body.slice(0, 90)}
+      <p
+        className={classNames(
+          "text-justify text-sm font-medium text-gray-600",
+          extendBody ? "" : "line-clamp-1"
+        )}
+      >
+        {extendBody ? post.body : post.body.slice(0, 90)}
       </p>
       <div className="flex flex-wrap pt-4 gap-2">
         {post.tags.map((tag, index) => {
           //   const colorHash = stringToColor(tag);
           return (
-            <div
-              key={index}
-              //   style={{
-              //     backgroundColor: colorHash,
-              //     color: stringToTextColor(colorHash),
-              //   }}
-              className="bg-slate-200 px-2 py-1 rounded-xl hover:bg-slate-300 cursor-pointer text-xs font-medium"
-            >
-              {tag}
-            </div>
+            <Link key={index} to={`/posts?tag=${tag}`}>
+              <div
+                //   style={{
+                //     backgroundColor: colorHash,
+                //     color: stringToTextColor(colorHash),
+                //   }}
+                className="bg-slate-200 px-2 py-1 rounded-xl hover:bg-slate-300 cursor-pointer text-xs font-medium"
+              >
+                {tag}
+              </div>
+            </Link>
           );
         })}
       </div>

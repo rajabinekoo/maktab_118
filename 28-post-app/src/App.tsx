@@ -8,9 +8,10 @@ import {
 
 import { PostsPage } from "./pages/posts";
 import { MainLayout } from "./layouts/main";
-import { ErrorBoundary } from "./components/errorBoundary";
 import { NotFound } from "./pages/not-found";
-import { fetchPostByIdLoader, PostById } from "./pages/post-by-id";
+import { PostById } from "./pages/post-by-id";
+import { PostComments } from "./components/post-comments";
+import { ErrorBoundary } from "./components/errorBoundary";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,13 @@ const router = createBrowserRouter([
       {
         path: "post-info/:id",
         element: <PostById />,
-        loader: fetchPostByIdLoader,
+        children: [
+          {
+            path: "comments",
+            element: <PostComments />,
+          },
+        ],
+        // loader: fetchPostByIdLoader,
       },
       {
         path: "/404",
@@ -68,7 +75,7 @@ const router2 = createBrowserRouter(
         <Route
           path="post-info/:id"
           element={<PostById />}
-          loader={fetchPostByIdLoader}
+          // loader={fetchPostByIdLoader}
           errorElement={<ErrorBoundary />}
         />
       </Route>
