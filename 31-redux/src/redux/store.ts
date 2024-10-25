@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { todoReducer } from "./features/todo.slice";
+import { brandReducer } from "./features/brand.slice";
 
 export const reduxStore = configureStore({
   reducer: {
     todo: todoReducer,
+    brands: brandReducer
   },
 });
 
