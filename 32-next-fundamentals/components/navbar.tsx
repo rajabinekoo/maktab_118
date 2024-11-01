@@ -3,7 +3,7 @@
 
 import { useRouter } from "next/navigation";
 
-export const Navbar = () => {
+export const Navbar: React.FC = () => {
   const router = useRouter();
 
   const navigate = (href: string) => {
@@ -25,7 +25,7 @@ export const Navbar = () => {
         Dashboard
       </button>
       <button
-        onClick={() => navigate("/settings")}
+        onClick={() => navigate("/dashboard/settings")}
         className="py-2 px-3 bg-gray-700 text-white rounded-lg"
       >
         Settings
