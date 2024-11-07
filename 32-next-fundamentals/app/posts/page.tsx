@@ -2,7 +2,6 @@ import { posts } from "@/data/posts";
 import Link from "next/link";
 
 const PostsPage: React.FC = () => {
-  throw new Error("chert");
   return (
     <main className="container mx-auto py-6">
       <p className="font-semibold text-2xl pb-6">Posts List</p>
