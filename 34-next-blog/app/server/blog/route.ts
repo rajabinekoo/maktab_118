@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { blogsList } from "@/server/services/blogs.service";
+import { blogsList, createBlog } from "@/server/services/blogs.service";
 import {
   createBlogSchema,
-  createBlogSchemaType,
+  thumbnailValidator,
 } from "@/server/validations/blogs.validation";
 
 export const dynamic = "force-dynamic";
@@ -16,13 +16,12 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: Request) {
   const body = await req.formData();
-  const data: createBlogSchemaType = {
-    hide: body.get("hide")?.toString() === "true",
+  const validationResult = createBlogSchema.safeParse({
+    hide: body.get("hide")?.toString(),
     text: body.get("text")?.toString() || "",
     title: body.get("title")?.toString() || "",
     description: body.get("description")?.toString() || "",
-  };
-  const validationResult = createBlogSchema.safeParse(data);
+  });
   if (!validationResult.success) {
     return NextResponse.json(
       { error: validationResult.error },
@@ -31,7 +30,22 @@ export async function POST(req: Request) {
       }
     );
   }
-  console.log(data);
-  console.log(body.get("thumbnail"));
+  const thumbnailInvalidMsg = thumbnailValidator(<File>body.get("thumbnail"));
+  if (!!thumbnailInvalidMsg) {
+    return NextResponse.json(
+      { error: thumbnailInvalidMsg },
+      {
+        status: 400,
+      }
+    );
+  }
+  if (!(await createBlog(body))) {
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      {
+        status: 500,
+      }
+    );
+  }
   return Response.json({ message: "ok" });
 }

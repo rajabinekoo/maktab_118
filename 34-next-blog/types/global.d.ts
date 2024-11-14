@@ -11,3 +11,7 @@ interface IPocketBasePagination {
   page: number;
   perPage: number;
 }
+
+interface IPocketBaseList<T> extends ListResult {
+  items: T[];
+}
