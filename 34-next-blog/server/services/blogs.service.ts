@@ -15,3 +15,12 @@ export const blogsList: blogsListType = async ({ page, perPage }) => {
     sort: "-created",
   });
 };
+
+type blogByIdType = (_: string) => Promise<any>;
+export const blogById: blogByIdType = async (id: string) => {
+  try {
+    return await pb.collection("blogs").getFirstListItem(`id="${id}"`);
+  } catch {
+    return undefined;
+  }
+};
