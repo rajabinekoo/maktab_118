@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authorization } from "@/server/services/bloggers.service";
 import { blogsList, createBlog } from "@/server/services/blogs.service";
 import {
   createBlogSchema,
@@ -16,6 +17,15 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: Request) {
   const body = await req.formData();
+  const token = req.headers.get("Authorization") || "";
+  if (!(await authorization(token))) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      {
+        status: 401,
+      }
+    );
+  }
   const validationResult = createBlogSchema.safeParse({
     hide: body.get("hide")?.toString(),
     text: body.get("text")?.toString() || "",

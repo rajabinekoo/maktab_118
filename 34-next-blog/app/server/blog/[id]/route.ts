@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { authorization } from "@/server/services/bloggers.service";
 import {
   blogById,
   deleteBlog,
@@ -7,8 +8,8 @@ import {
 } from "@/server/services/blogs.service";
 import {
   patchBlogSchema,
-  thumbnailValidator,
   updateBlogSchema,
+  thumbnailValidator,
 } from "@/server/validations/blogs.validation";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +38,15 @@ export async function PUT(
   const body = await req.formData();
   const searchParams = await params;
   const id = searchParams.id;
+  const token = req.headers.get("Authorization") || "";
+  if (!(await authorization(token))) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      {
+        status: 401,
+      }
+    );
+  }
 
   const validationResult = updateBlogSchema.safeParse({
     text: body.get("text")?.toString() || "",
@@ -94,6 +104,15 @@ export async function PATCH(
   const body = await req.json();
   const searchParams = await params;
   const id = searchParams.id;
+  const token = req.headers.get("Authorization") || "";
+  if (!(await authorization(token))) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      {
+        status: 401,
+      }
+    );
+  }
 
   if (!patchBlogSchema.safeParse(body).success) {
     return NextResponse.json(
@@ -126,10 +145,20 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _: Request,
+  req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const id = (await params).id;
+  const token = req.headers.get("Authorization") || "";
+  if (!(await authorization(token))) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      {
+        status: 401,
+      }
+    );
+  }
+
   const blog = await blogById(id);
   if (!blog) {
     return NextResponse.json(
