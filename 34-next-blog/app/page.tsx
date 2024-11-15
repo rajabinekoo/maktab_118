@@ -8,9 +8,11 @@ const HomeSkeleton = () => {
 
 const Home: React.FC<IPageParams> = async () => {
   return (
-    <Suspense fallback={<HomeSkeleton />}>
-      <BlogsListSSR />
-    </Suspense>
+    <main className="pt-navbar">
+      <Suspense fallback={<HomeSkeleton />}>
+        <BlogsListSSR />
+      </Suspense>
+    </main>
   );
 };
 

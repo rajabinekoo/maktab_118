@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
+import { Navbar } from "@/components/navbar";
 import { TanstackProvider } from "@/providers/tanstak.provider";
 import { ToastifyProvider } from "@/providers/toastify.provider";
 
@@ -23,9 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
+      <body className={`${poppins.className} antialiased bg-slate-100`}>
         <ToastifyProvider>
-          <TanstackProvider>{children}</TanstackProvider>
+          <TanstackProvider>
+            <Navbar />
+            {children}
+          </TanstackProvider>
         </ToastifyProvider>
       </body>
     </html>

@@ -21,6 +21,8 @@ export const createBlogSchema = z.object({
     ),
 });
 
+export type createBlogSchemaType = z.infer<typeof createBlogSchema>;
+
 export const updateBlogSchema = z.object({
   text: z.string().min(5).optional().or(z.literal("")),
   title: z.string().min(3).optional().or(z.literal("")),

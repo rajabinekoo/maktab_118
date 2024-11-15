@@ -9,7 +9,7 @@ export const BlogsListSSR: React.FC = async () => {
   return (
     <main
       className={classNames(
-        "mx-auto container py-10 px-5 sm:px-2 grid gap-6",
+        "mx-auto container pb-10 pt-5 px-5 sm:px-2 grid gap-6",
         "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
       )}
     >

@@ -5,7 +5,7 @@ import PocketBase from "pocketbase";
 const pb = new PocketBase("http://127.0.0.1:8090");
 
 await pb.admins.authWithPassword(
-  "ali.rajabinekoo@gmail.com",
+  process.env.NEXT_PUBLIC_POCKET_BASE_USERNAME as string,
   process.env.NEXT_PUBLIC_POCKET_BASE_PASSWORD as string
 );
 
