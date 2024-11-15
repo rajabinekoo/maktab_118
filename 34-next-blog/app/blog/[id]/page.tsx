@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+
+import { BlogInfo } from "@/containers/blog-info";
 import { blogById, blogsList } from "@/server/services/blogs.service";
 
 export const dynamicParams = true;
@@ -8,7 +10,7 @@ const BlogPage: React.FC<IPageParams<{ id: string }>> = async ({ params }) => {
   if (!id) return notFound();
   const blog = await blogById(id);
   if (!blog) return notFound();
-  return <p>{id}</p>;
+  return <BlogInfo {...blog} />;
 };
 
 export async function generateStaticParams() {
