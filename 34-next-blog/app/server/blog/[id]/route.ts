@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { authorization } from "@/server/services/bloggers.service";
 import {
   blogById,
@@ -93,6 +94,8 @@ export async function PUT(
       }
     );
   }
+
+  revalidatePath(`/blog/${id}`);
   return Response.json({ message: "ok" });
 }
 
@@ -141,6 +144,8 @@ export async function PATCH(
       }
     );
   }
+
+  revalidatePath(`/blog/${id}`);
   return Response.json({ message: "ok" });
 }
 
@@ -176,5 +181,7 @@ export async function DELETE(
       }
     );
   }
+
+  revalidatePath(`/blog/${id}`);
   return Response.json({ message: "ok" });
 }

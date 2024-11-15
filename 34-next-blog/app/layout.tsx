@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
+import { TanstackProvider } from "@/providers/tanstak.provider";
+import { ToastifyProvider } from "@/providers/toastify.provider";
+
 import "./globals.css";
 
 const poppins = Poppins({
@@ -20,7 +23,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>
+        <ToastifyProvider>
+          <TanstackProvider>{children}</TanstackProvider>
+        </ToastifyProvider>
+      </body>
     </html>
   );
 }

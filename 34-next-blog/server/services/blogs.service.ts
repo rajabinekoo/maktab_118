@@ -6,7 +6,7 @@ const pb = new PocketBase("http://127.0.0.1:8090");
 
 await pb.admins.authWithPassword(
   "ali.rajabinekoo@gmail.com",
-  "9LAqKG422VncVzzHhBu0SUJtHliAoinr"
+  process.env.NEXT_PUBLIC_POCKET_BASE_PASSWORD as string
 );
 
 type blogsListType = (
