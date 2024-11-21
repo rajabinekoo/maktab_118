@@ -1,9 +1,15 @@
-import axios from "axios";
-import { getSession } from "@/utils/session";
+import axios, { AxiosInstance } from "axios";
 
-export const generateAxiosInstance = () => {
+type funcType = (_?: {
+  signal?: AbortSignal;
+  progressCb?: (_?: number) => void;
+}) => AxiosInstance;
+export const generateAxiosInstance: funcType = (params) => {
   return axios.create({
     baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
-    headers: { Authorization: getSession() },
+    onUploadProgress(progressEvent) {
+      if (!!params?.progressCb) params.progressCb(progressEvent.progress);
+    },
+    signal: params?.signal,
   });
 };

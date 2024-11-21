@@ -10,12 +10,12 @@ await pb.admins.authWithPassword(
 );
 
 type blogsListType = (
-  _: IPocketBasePagination
+  _: IPocketBasePagination & { hide?: boolean }
 ) => Promise<IPocketBaseList<IBlog>>;
-export const blogsList: blogsListType = async ({ page, perPage }) => {
+export const blogsList: blogsListType = async ({ page, perPage, hide = true }) => {
   return await pb.collection("blogs").getList(page, perPage, {
     sort: "-created",
-    filter: "hide=False",
+    filter: hide ? "hide=False" : "",
   });
 };
 

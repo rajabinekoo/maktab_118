@@ -1,11 +1,20 @@
+export const dynamic = "force-dynamic";
+
 import React from "react";
+import { cookies } from "next/headers";
 
 import { classNames } from "@/utils/classname";
 import { BlogCard } from "@/components/blog-card";
 import { blogsList } from "@/server/services/blogs.service";
+import { authorization } from "@/server/services/bloggers.service";
 
 export const BlogsListSSR: React.FC = async () => {
-  const list = await blogsList({ page: 1, perPage: 10 });
+  const cookie = await cookies();
+  const session = cookie.get("session");
+  const authorized = !session?.value
+    ? false
+    : await authorization(session.value);
+  const list = await blogsList({ page: 1, perPage: 10, hide: !authorized });
   return (
     <main
       className={classNames(

@@ -18,5 +18,7 @@ export const useCreateBlog = () => {
   return useMutation({
     mutationFn: createBlog,
     mutationKey: ["create-blog"],
+    retry: 0,
+    retryDelay: 0,
   });
 };

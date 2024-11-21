@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { authSchema } from "@/server/validations/auth.validation";
 import {
@@ -46,5 +47,7 @@ export async function POST(req: Request) {
       }
     );
   }
+  const cookieStore = await cookies();
+  cookieStore.set("session", token);
   return Response.json({ token });
 }

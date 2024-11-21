@@ -17,9 +17,17 @@ export const removeBlogById: removeBlogByIdType = async (id) => {
   return response.data;
 };
 
-type createBlogType = (_: FormData) => Promise<{ message: string }>;
-export const createBlog: createBlogType = async (data) => {
-  const instance = generateAxiosInstance();
+type createBlogType = (_: {
+  data: FormData;
+  signal?: AbortSignal;
+  progressCb?: (_?: number) => void;
+}) => Promise<{ message: string }>;
+export const createBlog: createBlogType = async ({
+  data,
+  signal,
+  progressCb,
+}) => {
+  const instance = generateAxiosInstance({ progressCb, signal });
   const response = await instance.post(urls.blogs.create, data);
   return response.data;
 };
