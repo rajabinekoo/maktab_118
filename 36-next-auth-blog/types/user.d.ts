@@ -1,7 +1,8 @@
 interface IUser {
   id: string;
-  username: string;
-  password: string;
+  name: string;
+  email: string;
+  avatar: string;
 }
 
 interface ISession {

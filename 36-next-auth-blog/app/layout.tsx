@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 
 import { Navbar } from "@/components/navbar";
 import { TanstackProvider } from "@/providers/tanstak.provider";
+import { NextAuthProvider } from "@/providers/session.provider";
 import { ToastifyProvider } from "@/providers/toastify.provider";
 
 import "./globals.css";
@@ -25,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased bg-slate-100`}>
-        <ToastifyProvider>
-          <TanstackProvider>
-            <Navbar />
-            {children}
-          </TanstackProvider>
-        </ToastifyProvider>
+        <NextAuthProvider>
+          <ToastifyProvider>
+            <TanstackProvider>
+              <Navbar />
+              {children}
+            </TanstackProvider>
+          </ToastifyProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

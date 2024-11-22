@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { authorization } from "@/server/services/bloggers.service";
@@ -17,16 +16,13 @@ import {
 export const dynamic = "force-dynamic";
 
 export async function GET(
-  _: Request,
+  req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const id = (await params).id;
   const blog = await blogById(id);
-  const cookie = await cookies();
-  const session = cookie.get("session");
-  const authorized = !session?.value
-    ? false
-    : await authorization(session.value);
+  const token = req.headers.get("Authorization") || "";
+  const authorized = !token ? false : await authorization(token);
   if (!blog || (blog.hide && !authorized)) {
     return NextResponse.json(
       { error: "Blog not found" },
@@ -45,9 +41,7 @@ export async function PUT(
   const body = await req.formData();
   const searchParams = await params;
   const id = searchParams.id;
-  const cookie = await cookies();
-  const session = cookie.get("session");
-  const token = session?.value || "";
+  const token = req.headers.get("Authorization") || "";
   if (!(await authorization(token))) {
     return NextResponse.json(
       { error: "Unauthorized" },
@@ -115,9 +109,7 @@ export async function PATCH(
   const body = await req.json();
   const searchParams = await params;
   const id = searchParams.id;
-  const cookie = await cookies();
-  const session = cookie.get("session");
-  const token = session?.value || "";
+  const token = req.headers.get("Authorization") || "";
   if (!(await authorization(token))) {
     return NextResponse.json(
       { error: "Unauthorized" },
@@ -164,9 +156,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const id = (await params).id;
-  const cookie = await cookies();
-  const session = cookie.get("session");
-  const token = session?.value || "";
+  const token = req.headers.get("Authorization") || "";
   if (!(await authorization(token))) {
     return NextResponse.json(
       { error: "Unauthorized" },

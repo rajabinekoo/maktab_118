@@ -10,6 +10,28 @@ await pb.admins.authWithPassword(
   process.env.NEXT_PUBLIC_POCKET_BASE_PASSWORD as string
 );
 
+type findUserByEmailFuncType = (_email: string) => Promise<IUser | undefined>;
+export const findUserByEmail: findUserByEmailFuncType = async (email) => {
+  try {
+    return await pb
+      .collection("bloggers")
+      .getFirstListItem(`email="${email.toLowerCase()}"`);
+  } catch {
+    return undefined;
+  }
+};
+
+type createUserFuncType = (
+  _user: Omit<IUser, "id">
+) => Promise<IUser | undefined>;
+export const createUser: createUserFuncType = async (newUser) => {
+  try {
+    return await pb.collection("bloggers").create(newUser);
+  } catch {
+    return undefined;
+  }
+};
+
 // credential = username + password
 type getBloggerByCredentialsType = (
   _username: string,
@@ -33,6 +55,47 @@ export const loginBlogger: loginBloggerType = async (userId, token) => {
   try {
     const expiration = moment().add(30, "minutes").unix();
     await pb.collection("sessions").create({ userId, token, expiration });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+type createSessionType = (
+  userId: string,
+  token: string,
+  expiration: number
+) => Promise<boolean>;
+export const createSession: createSessionType = async (
+  userId,
+  token,
+  expiration
+) => {
+  try {
+    await pb.collection("sessions").create({ userId, token, expiration });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+type getSessionByTokenFuncType = (
+  token: string
+) => Promise<ISession | undefined>;
+export const getSessionByToken: getSessionByTokenFuncType = async (token) => {
+  try {
+    return await pb.collection("sessions").getFirstListItem(`token="${token}"`);
+  } catch {
+    return undefined;
+  }
+};
+
+type delSessionByTokenFuncType = (sessionId: string) => Promise<boolean>;
+export const delSessionByToken: delSessionByTokenFuncType = async (
+  sessionId
+) => {
+  try {
+    await pb.collection("sessions").delete(`id="${sessionId}"`);
     return true;
   } catch {
     return false;

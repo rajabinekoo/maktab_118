@@ -1,3 +1,4 @@
+import { getSession } from "@/utils/session";
 import axios, { AxiosInstance } from "axios";
 
 type funcType = (_?: {
@@ -11,5 +12,6 @@ export const generateAxiosInstance: funcType = (params) => {
       if (!!params?.progressCb) params.progressCb(progressEvent.progress);
     },
     signal: params?.signal,
+    headers: { Authorization: getSession() },
   });
 };

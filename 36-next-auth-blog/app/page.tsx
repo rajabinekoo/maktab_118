@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
 import { classNames } from "@/utils/classname";
+import { BlogsList } from "@/containers/blogs-list";
 import { BlogCardSkeleton } from "@/components/blog-card";
-import { BlogsListSSR } from "@/containers/blogs-list-ssr";
 
 const HomeSkeleton = () => {
   return (
@@ -23,7 +23,7 @@ const Home: React.FC<IPageParams> = async () => {
   return (
     <main className="pt-navbar">
       <Suspense fallback={<HomeSkeleton />}>
-        <BlogsListSSR />
+        <BlogsList />
       </Suspense>
     </main>
   );
