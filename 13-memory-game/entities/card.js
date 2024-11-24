@@ -49,7 +49,7 @@ const onClickCard = (e) => {
   const mainDiv = getMainParent(e.target);
   const name = mainDiv.dataset.name;
 
-  if (passedCards[name] || avoid) return;
+  if (mainDiv.classList.contains("active") || avoid) return;
 
   mainDiv.classList.add("active");
 
