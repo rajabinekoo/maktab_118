@@ -1,6 +1,7 @@
+import { Chat, ChatDocument } from './schema/chat.schema';
+
 export class Error {
-  constructor(public readonly message: string) {
-  }
+  constructor(public readonly message: string) {}
 }
 
 export class NewMessageResponse {
@@ -15,7 +16,7 @@ export class NewMessageResponse {
     _context: string,
     _from: string,
     _to: string,
-    _createdAt: string
+    _createdAt: string,
   ) {
     this.chatId = _chatId;
     this.context = _context;
@@ -28,10 +29,12 @@ export class NewMessageResponse {
 export class JoinResponse {
   clientId!: string;
   roomId!: string;
+  chats!: Chat[];
 
-  constructor(_clientId: string, _roomId: string) {
+  constructor(_clientId: string, _roomId: string, _chats: Chat[]) {
     this.clientId = _clientId;
     this.roomId = _roomId;
+    this.chats = _chats;
   }
 }
 

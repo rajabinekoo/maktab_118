@@ -1,6 +1,6 @@
 import { SocketProvider } from "@/providers/socket.provider";
 
-export default function AdminLayout({
+export default function ChatLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -5,3 +5,12 @@ interface ILoginResDto {
 interface ILoginReqDto {
   refresh_token: string;
 }
+
+interface ISignupReqDto {
+  email: string;
+}
+
+interface ISignupResDto {
+  access_token: string;
+  refresh_token: string;
+}

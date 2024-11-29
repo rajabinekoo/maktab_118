@@ -1,7 +1,13 @@
-import { ChatRoom } from "@/containers/chat-room";
+import { AdminChatRoom } from "@/containers/admin-chat-room";
+import { SendMessage } from "@/containers/send-message";
 
 const RoomPage: React.FC = () => {
-  return <ChatRoom />;
+  return (
+    <main className="space-y-10">
+      <AdminChatRoom />
+      <SendMessage />
+    </main>
+  );
 };
 
 export default RoomPage;

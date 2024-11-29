@@ -1,3 +1,5 @@
+import { UserLoginContainer } from "@/containers/user-login";
+
 export default function Home() {
-  return <div>ok</div>;
+  return <UserLoginContainer />;
 }

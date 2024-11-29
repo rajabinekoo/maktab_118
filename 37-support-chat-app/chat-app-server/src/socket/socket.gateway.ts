@@ -9,7 +9,7 @@ import {
   ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { Chat } from 'src/schema/chat.schema';
+import { Chat, ChatDocument } from 'src/schema/chat.schema';
 import { User } from 'src/schema/user.schema';
 import { SocketGuard } from './socket.guard';
 import {
@@ -74,9 +74,20 @@ export class SocketGateway implements OnModuleInit {
       );
       return;
     }
+
     if (!!client.data?.roomId) {
-      client.emit('error', new Error('Already join to chat.'));
-      return;
+      const existRoom = await this.roomModel
+        .findOne({
+          _id: new mongoose.Types.ObjectId(client.data.roomId),
+        })
+        .populate('chats');
+      client.data.roomId = existRoom._id.toString();
+      client.join(client.data.roomId);
+      return new JoinResponse(
+        client.data.user._id.toString(),
+        client.data.roomId,
+        existRoom.chats || [],
+      );
     }
     const rooms = await this.roomModel.find().populate('admin');
     const busyAdmins: mongoose.Schema.Types.ObjectId[] = await rooms.map(
@@ -94,6 +105,21 @@ export class SocketGateway implements OnModuleInit {
     }
 
     if (!!admin && admin.isOnline) {
+      const existRoom = await this.roomModel
+        .findOne({
+          customer: new mongoose.Types.ObjectId(client.data.user._id),
+        })
+        .populate('chats');
+      if (!!existRoom) {
+        client.data.roomId = existRoom._id.toString();
+        client.join(client.data.roomId);
+        return new JoinResponse(
+          client.data.user._id.toString(),
+          client.data.roomId,
+          existRoom.chats || [],
+        );
+      }
+
       const room = await this.roomModel.create({
         admin,
         customer: client.data.user._id,
@@ -119,6 +145,7 @@ export class SocketGateway implements OnModuleInit {
       return new JoinResponse(
         client.data.user._id.toString(),
         client.data.roomId,
+        [],
       );
     } else {
       client.emit(

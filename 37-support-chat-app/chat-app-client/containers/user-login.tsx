@@ -5,29 +5,27 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/input";
-import { login } from "@/apis/auth.service";
+import { signup } from "@/apis/auth.service";
 import { setToken } from "@/utils/token-management";
 import { errorHandler } from "@/utils/error-handler";
 import { SocketContext } from "@/providers/socket.provider";
 
-export const AdminLoginContainer: React.FC = () => {
-  const [refreshToken, setRefreshToken] = React.useState<string>("");
+export const UserLoginContainer: React.FC = () => {
+  const [email, setEmail] = React.useState<string>("");
   const { resetSocket } = React.useContext(SocketContext);
   const { push } = useRouter();
 
-  const onChangeRefreshToken: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    setRefreshToken(event.target.value);
+  const onChangeEmail: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setEmail(event.target.value);
   };
 
   const onSubmit = async () => {
-    if (!refreshToken?.trim?.()) return;
+    if (!email?.trim?.()) return;
     try {
-      const response = await login({ refresh_token: refreshToken });
+      const response = await signup({ email });
       setToken(response.access_token);
       resetSocket();
-      push("/admin/rooms");
+      push("/chat");
     } catch (error) {
       errorHandler(error as AxiosError);
     }
@@ -35,12 +33,12 @@ export const AdminLoginContainer: React.FC = () => {
 
   return (
     <div className="space-y-5 w-full">
-      <p className="text-lg font-semibold text-center">Admin Login</p>
+      <p className="text-lg font-semibold text-center">User Login</p>
       <Input
-        onChange={onChangeRefreshToken}
-        value={refreshToken}
-        placeholder="refresh_token"
-        label="Refresh Token"
+        onChange={onChangeEmail}
+        value={email}
+        placeholder="your email"
+        label="Email Address"
       />
       <button
         onClick={onSubmit}

@@ -20,3 +20,9 @@ interface IRoomChats {
   list: Array<IChatItem>;
   clientId: string;
 }
+
+interface IJoinResDto {
+  chats: IChatItem[];
+  clientId: string;
+  roomId: string;
+}
