@@ -17,9 +17,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Socket.io
+## Databases
 
-### User events
+[Redis](https://github.com/MicrosoftArchive/redis/releases/download/win-3.0.504/Redis-x64-3.0.504.msi)
+</br>Mongo
+
+## Socket.io
 
 #### listening events
 
