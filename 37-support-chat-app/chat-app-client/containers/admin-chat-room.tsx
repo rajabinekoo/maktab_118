@@ -8,7 +8,7 @@ import { SocketContext } from "@/providers/socket.provider";
 
 export const AdminChatRoom: React.FC = () => {
   const { roomId } = useParams();
-  const { socket } = React.useContext(SocketContext);
+  const { socket, connected, resetSocket } = React.useContext(SocketContext);
   const [clientId, setClientId] = React.useState<string>("");
   const [chats, setChats] = React.useState<Array<IChatItem> | undefined>(
     undefined
@@ -28,17 +28,19 @@ export const AdminChatRoom: React.FC = () => {
   }, [socket, roomId]);
 
   React.useEffect(() => {
-    console.log("socket", socket);
-    if (!socket) return;
+    if (!socket || !connected) return;
     socket.on("receiveMessage", (data) => {
-      console.log(data);
       try {
         const chat: IChatItem = JSON.parse(data);
         setChats((prev) => [...(prev || []), chat]);
       } catch {}
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
+  }, [socket, connected]);
+
+  React.useEffect(() => {
+    resetSocket();
+  }, []);
 
   if (!roomId) return notFound();
 

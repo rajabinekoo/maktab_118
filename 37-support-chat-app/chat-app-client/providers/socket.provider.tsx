@@ -9,40 +9,37 @@ const serverUrl = process.env.NEXT_PUBLIC_WEBSOCKET_SERVER_URL;
 
 export const SocketContext = React.createContext<{
   socket?: Socket;
+  connected?: boolean;
   resetSocket: () => void;
 }>({
   socket: undefined,
+  connected: false,
   resetSocket: () => undefined,
 });
 
 export const SocketProvider: React.FC<IChildren> = ({ children }) => {
   const [socket, setSocket] = React.useState<Socket | undefined>();
+  const [connected, setConnected] = React.useState<boolean>(false);
 
   const resetSocket = () => {
     const token = getToken();
     if (!token) return;
-    setSocket(
-      io(serverUrl, {
-        autoConnect: true,
-        extraHeaders: { authorization: token },
-      })
-    );
-  };
-
-  React.useEffect(() => {
-    if (!!socket) return;
-    resetSocket();
-  }, [socket]);
-
-  React.useEffect(() => {
-    if (!socket) return;
-    socket.on("error", (err: { message: string }) => {
+    setConnected(() => false);
+    const s = io(serverUrl, {
+      autoConnect: true,
+      extraHeaders: { authorization: token },
+    });
+    s.on("connect", () => {
+      setConnected(true);
+    });
+    s.on("error", (err: { message: string }) => {
       toast.error(err.message);
     });
-  }, [socket]);
+    setSocket(s);
+  };
 
   return (
-    <SocketContext.Provider value={{ socket, resetSocket }}>
+    <SocketContext.Provider value={{ socket, resetSocket, connected }}>
       {children}
     </SocketContext.Provider>
   );

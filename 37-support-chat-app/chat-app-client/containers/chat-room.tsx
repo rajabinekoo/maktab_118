@@ -7,7 +7,7 @@ import { SocketContext } from "@/providers/socket.provider";
 import { SendMessage } from "./send-message";
 
 export const ChatRoom: React.FC = () => {
-  const { socket } = React.useContext(SocketContext);
+  const { socket, connected, resetSocket } = React.useContext(SocketContext);
   const [clientId, setClientId] = React.useState<string>("");
   const [chats, setChats] = React.useState<Array<IChatItem> | undefined>(
     undefined
@@ -27,7 +27,7 @@ export const ChatRoom: React.FC = () => {
   }, [socket]);
 
   React.useEffect(() => {
-    if (!socket) return;
+    if (!socket || !connected) return;
     socket.on("receiveMessage", (data) => {
       try {
         const chat: IChatItem = JSON.parse(data);
@@ -35,7 +35,11 @@ export const ChatRoom: React.FC = () => {
       } catch {}
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
+  }, [socket, connected]);
+
+  React.useEffect(() => {
+    resetSocket();
+  }, []);
 
   return (
     <div className="space-y-7">
