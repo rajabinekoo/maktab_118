@@ -6,4 +6,6 @@ interface Issue {
   userId: string;
   content: string;
   status: IssueStatue;
+  createdAt?: string;
+  user?: IUser;
 }
